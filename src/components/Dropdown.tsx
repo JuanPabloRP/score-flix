@@ -28,11 +28,7 @@ const DropDown: FC<DropDownProps> = ({
 	}, [defaultValue]);
 
 	useEffect(() => {
-		console.log('cositas');
-
-		optionsSelect.map((o) => {
-			console.log(o);
-		});
+		optionsSelect.map((o) => {});
 	});
 
 	return (

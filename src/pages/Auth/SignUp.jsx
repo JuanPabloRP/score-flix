@@ -1,8 +1,68 @@
 import { Link } from 'react-router-dom';
 import DropDown from '../../components/Dropdown';
-import { Enum_Rol } from '../../utils/Enums.ts';
+import { Enum_Rol } from '../../utils/Enums';
+import ButtonLoading from '../../components/ButtonLoading';
+import useFormData from '../../hooks/useFormData';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const SignUp = () => {
+	const [passwords, setPasswords] = useState({
+		password: '',
+		confirmarPassword: '',
+	});
+
+	useEffect(() => {}, [passwords]);
+
+	const { form, formData, updateFormData } = useFormData();
+
+	const submitForm = (e) => {
+		e.preventDefault();
+
+		const { target } = e;
+
+		const passValue = target[2].value;
+		const confPassValue = target[3].value;
+
+		if (!(passValue === confPassValue)) {
+			toast.error('Error al registrar', {
+				position: 'top-right',
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'colored',
+			});
+
+			return;
+		}
+
+		toast.success('😎 Wow so easy!', {
+			position: 'top-right',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+	};
+
+	const onChangePassword = (e, field) => {
+		const newValue = e.target.value;
+
+		setPasswords((prevValue) => ({
+			...prevValue,
+			[field]: newValue,
+		}));
+
+		console.log(passwords);
+	};
+
 	return (
 		<>
 			<header className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -12,7 +72,7 @@ const SignUp = () => {
 			</header>
 
 			<main className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-				<form className="space-y-6">
+				<form className="space-y-6" onSubmit={submitForm}>
 					<section>
 						<label
 							htmlFor="fullName"
@@ -57,14 +117,6 @@ const SignUp = () => {
 							>
 								Contraseña
 							</label>
-							{/* <div className="text-sm">
-								<a
-									href="#"
-									className="font-semibold text-indigo-600 hover:text-indigo-500"
-								>
-									Forgot password?
-								</a>
-							</div> */}
 						</article>
 						<article className="mt-2">
 							<input
@@ -73,7 +125,38 @@ const SignUp = () => {
 								type="password"
 								autoComplete="current-password"
 								required
+								onChange={(e) => onChangePassword(e, 'password')}
+								value={passwords.password}
 								className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+							/>
+						</article>
+					</section>
+
+					<section>
+						<article className="flex items-center justify-between">
+							<label
+								htmlFor="confirmarPassword"
+								className="block text-sm font-medium leading-6 text-gray-900"
+							>
+								Confirmar contraseña
+							</label>
+						</article>
+						<article className="mt-2">
+							<input
+								id="confirmarPassword"
+								name="confirmarPassword"
+								type="password"
+								required
+								onChange={(e) => onChangePassword(e, 'confirmarPassword')}
+								value={passwords.confirmarPassword}
+								className={`block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+									passwords.confirmarPassword.length > 0 &&
+									passwords.password.length > 0
+										? passwords.confirmarPassword === passwords.password
+											? 'bg-green-200'
+											: 'bg-red-200'
+										: null
+								}`}
 							/>
 						</article>
 					</section>
@@ -86,13 +169,13 @@ const SignUp = () => {
 						options={Enum_Rol}
 						hidden={false}
 					/>
+
 					<section>
-						<button
-							type="submit"
-							className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-						>
-							Regístrarse
-						</button>
+						<ButtonLoading
+							disabled={false}
+							loading={false}
+							text={'Regístrarse'}
+						/>
 					</section>
 				</form>
 
