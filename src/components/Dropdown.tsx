@@ -46,7 +46,7 @@ const DropDown: FC<DropDownProps> = ({
 			>
 				{optionsSelect.map((o) => {
 					return (
-						<option key={nanoid()} value={o[0]} disabled={o[2] ?? false}>
+						<option key={1} value={o[0]} disabled={o[2] ?? false}>
 							{o[1]}
 						</option>
 					);
@@ -55,5 +55,8 @@ const DropDown: FC<DropDownProps> = ({
 		</label>
 	);
 };
+
+//fix nanoid on key prop on option
+// key={nanoid()}
 
 export default DropDown;
