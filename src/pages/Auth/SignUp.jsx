@@ -66,101 +66,92 @@ const SignUp = () => {
 	return (
 		<>
 			<header className="sm:mx-auto sm:w-full sm:max-w-sm">
-				<h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+				<h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
 					Regístrate
 				</h2>
 			</header>
 
 			<main className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 				<form className="space-y-6" onSubmit={submitForm}>
-					<section>
+					<section className="relative z-0 w-full group">
+						<input
+							type="text"
+							name="floating_full_name"
+							id="floating_full_name"
+							className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+							placeholder=" "
+							required
+						/>
 						<label
-							htmlFor="fullName"
-							className="block text-sm font-medium leading-6 text-gray-900"
+							for="floating_full_name"
+							className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 						>
-							Nombre completo
+							Full name
 						</label>
-						<article className="mt-2">
-							<input
-								id="fullName"
-								name="fullName"
-								type="text"
-								autoComplete="fullName"
-								required
-								className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-							/>
-						</article>
-					</section>
-					<section>
-						<label
-							htmlFor="email"
-							className="block text-sm font-medium leading-6 text-gray-900"
-						>
-							Correo electronico
-						</label>
-						<article className="mt-2">
-							<input
-								id="email"
-								name="email"
-								type="email"
-								autoComplete="email"
-								required
-								className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-							/>
-						</article>
-					</section>
-					<section>
-						<article className="flex items-center justify-between">
-							<label
-								htmlFor="password"
-								className="block text-sm font-medium leading-6 text-gray-900"
-							>
-								Contraseña
-							</label>
-						</article>
-						<article className="mt-2">
-							<input
-								id="password"
-								name="password"
-								type="password"
-								autoComplete="current-password"
-								required
-								onChange={(e) => onChangePassword(e, 'password')}
-								value={passwords.password}
-								className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-							/>
-						</article>
 					</section>
 
-					<section>
-						<article className="flex items-center justify-between">
-							<label
-								htmlFor="confirmarPassword"
-								className="block text-sm font-medium leading-6 text-gray-900"
-							>
-								Confirmar contraseña
-							</label>
-						</article>
-						<article className="mt-2">
-							<input
-								id="confirmarPassword"
-								name="confirmarPassword"
-								type="password"
-								required
-								onChange={(e) => onChangePassword(e, 'confirmarPassword')}
-								value={passwords.confirmarPassword}
-								className={`block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
-									passwords.confirmarPassword.length > 0 &&
-									passwords.password.length > 0
-										? passwords.confirmarPassword === passwords.password
-											? 'bg-green-200'
-											: 'bg-red-200'
-										: null
-								}`}
-							/>
-						</article>
+					<section className="relative z-0 w-full mb-6 group">
+						<input
+							type="email"
+							name="floating_email"
+							id="floating_email"
+							className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+							placeholder=" "
+							required
+						/>
+						<label
+							for="floating_email"
+							className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+						>
+							Email address
+						</label>
 					</section>
 
+					<section className="relative z-0 w-full mb-6 group">
+						<input
+							type="password"
+							name="floating_password"
+							id="password"
+							required
+							onChange={(e) => onChangePassword(e, 'password')}
+							value={passwords.password}
+							className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+							placeholder=" "
+						/>
+						<label
+							for="floating_password"
+							className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+						>
+							Password
+						</label>
+					</section>
+
+					<section className="relative z-0 w-full mb-6 group">
+						<input
+							type="password"
+							name="repeat_password"
+							id="confirmarPassword"
+							required
+							onChange={(e) => onChangePassword(e, 'confirmarPassword')}
+							value={passwords.confirmarPassword}
+							className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  border-green-800 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer  ${
+								passwords.confirmarPassword.length > 0 &&
+								passwords.password.length > 0
+									? passwords.confirmarPassword === passwords.password
+										? ' border-green-500 dark:border-green-500'
+										: ' border-b-red-500 dark:border-b-red-500'
+									: null
+							}`}
+							placeholder=" "
+						/>
+						<label
+							for="floating_repeat_password"
+							className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+						>
+							Confirm password
+						</label>
+					</section>
+					{/* 
 					<DropDown
 						label="Rol deseado:"
 						name="rol"
@@ -169,13 +160,16 @@ const SignUp = () => {
 						options={Enum_Rol}
 						hidden={false}
 					/>
-
-					<section>
+ 		*/}
+					<section className="flex w-full">
 						<ButtonLoading
 							disabled={false}
 							loading={false}
 							text={'Regístrarse'}
 						/>
+					</section>
+					<section>
+						<Link to={'/movies'}>Ir</Link>
 					</section>
 				</form>
 
@@ -187,7 +181,7 @@ const SignUp = () => {
 					¿Ya estás registrado?{' '}
 					<Link
 						to="/auth/signin"
-						className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+						className="font-semibold leading-6 text-blue-600 hover:text-blue-500"
 					>
 						Inicia sesión
 					</Link>
