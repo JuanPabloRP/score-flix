@@ -9,24 +9,37 @@ const PrivateNavbar = () => {
 		{
 			id: 1,
 			name: 'Inicio',
-			link: '/movies',
+			link: '/sf/movies',
 		},
 		{
 			id: 2,
 			name: 'Publicar',
-			link: '/newMovie',
+			link: '/sf/new',
 		},
 		{
 			id: 3,
 			name: 'Modificar',
-			link: '/newMovie',
+			link: '/sf/mymovies',
+		},
+	];
+
+	const userOptions = [
+		{
+			id: 1,
+			name: 'Perfil',
+			link: '/sf/user',
+		},
+		{
+			id: 9,
+			name: 'Cerrar sesión',
+			link: '/',
 		},
 	];
 
 	return (
-		<nav className="bg-white border-gray-200 dark:bg-gray-900">
+		<nav className="sticky top-0 z-10 bg-white border-gray-200 dark:bg-gray-900">
 			<section className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-				<Link to="/movies" className="flex items-center">
+				<Link to="/sf/movies" className="flex items-center">
 					<img
 						src="https://flowbite.com/docs/images/logo.svg"
 						className="h-8 mr-3"
@@ -36,6 +49,7 @@ const PrivateNavbar = () => {
 						ScoreFlix
 					</span>
 				</Link>
+				{/* user menu */}
 				<section className="flex items-center md:order-2">
 					<button
 						type="button"
@@ -55,54 +69,33 @@ const PrivateNavbar = () => {
 					</button>
 					<section
 						className={` ${
-							openUserMenu ? 'inline' : 'hidden'
+							openUserMenu ? 'block' : 'hidden'
 						} z-50 absolute right-2 top-10 my-4 text-base list-none bg-white sectionide-y sectionide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:sectionide-gray-600`}
 						id="user-dropdown"
 					>
 						<section className="px-4 py-3">
 							<span className="block text-sm text-gray-900 dark:text-white">
-								Bonnie Green
+								Nombre usuario
 							</span>
 							<span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-								name@flowbite.com
+								user@epic.dou
 							</span>
 						</section>
 						<ul className="py-2" aria-labelledby="user-menu-button">
-							<li>
-								<a
-									href="#"
-									className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-								>
-									Dashboard
-								</a>
-							</li>
-							<li>
-								<a
-									href="#"
-									className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-								>
-									Settings
-								</a>
-							</li>
-							<li>
-								<a
-									href="#"
-									className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-								>
-									Earnings
-								</a>
-							</li>
-							<li>
-								<a
-									href="#"
-									className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-								>
-									Sign out
-								</a>
-							</li>
+							{userOptions.map(({ id, name, link }) => (
+								<li key={id}>
+									<Link
+										to={link}
+										className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+									>
+										{name}
+									</Link>
+								</li>
+							))}
 						</ul>
 					</section>
 
+					{/* navbar menu */}
 					<button
 						data-collapse-toggle="navbar-user"
 						type="button"

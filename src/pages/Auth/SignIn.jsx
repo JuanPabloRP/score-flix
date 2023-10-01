@@ -54,7 +54,7 @@ const SignIn = () => {
 						/>
 					</section>
 					<section>
-						<Link to={'/movies'}>Ir</Link>
+						<Link to={'/sf/movies'}>Ir</Link>
 					</section>
 				</form>
 

@@ -151,7 +151,7 @@ const SignUp = () => {
 							Confirm password
 						</label>
 					</section>
-					{/* 
+{/* 
 					<DropDown
 						label="Rol deseado:"
 						name="rol"
@@ -160,7 +160,7 @@ const SignUp = () => {
 						options={Enum_Rol}
 						hidden={false}
 					/>
- 		*/}
+ */}
 					<section className="flex w-full">
 						<ButtonLoading
 							disabled={false}
@@ -169,7 +169,7 @@ const SignUp = () => {
 						/>
 					</section>
 					<section>
-						<Link to={'/movies'}>Ir</Link>
+						<Link to={'/sf/movies'}>Ir</Link>
 					</section>
 				</form>
 
