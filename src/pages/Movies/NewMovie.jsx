@@ -1,12 +1,16 @@
+import FormMovie from '../../components/FormMovie';
+
 const NewMovie = () => {
 	return (
 		<main>
 			<header>
-				<h1>Crear una nueva reseña de película</h1>
+				<h1 className="text-center my-5 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+					Crear una nueva reseña
+				</h1>
 			</header>
-			<section>
-        
-      </section>
+			<section className="max-w-2xl mx-auto">
+				<FormMovie />
+			</section>
 		</main>
 	);
 };

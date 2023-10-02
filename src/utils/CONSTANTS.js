@@ -1,9 +1,18 @@
-const Enum_Rol = {
-	ADMINISTRADOR: 'Administrador',
-	USUARIO: 'Usuario',
-};
+/* const GENRES = [
+	'Todos',
+	'Drama',
+	'Acción',
+	'Ciencia ficción',
+	'Crimen',
+	'Historia',
+	'Autobiografía',
+	'Aventura',
+	'Romance',
+	'Sin genero',
+];
+ */
 
-const Enum_Genres = {
+const GENRES = {
 	TODOS: 'Todos',
 	DRAMA: 'Drama',
 	ACCION: 'Acción',
@@ -16,4 +25,4 @@ const Enum_Genres = {
 	SIN_GENERO: 'Sin genero',
 };
 
-export { Enum_Rol, Enum_Genres };
+export { GENRES };

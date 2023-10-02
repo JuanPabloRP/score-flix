@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Footer from '../components/Footer';
 import PublicCard from '../components/PublicCard';
 import PublicNavbar from '../components/PublicNavbar';

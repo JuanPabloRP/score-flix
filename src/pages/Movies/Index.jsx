@@ -1,36 +1,21 @@
 import React from 'react';
 import moviesrated from '../../data/moviesrated.json';
 import { useState } from 'react';
-import Range from '../../components/Range';
+//import Range from '../../components/Range';
 import MovieCard from '../../components/MovieCard';
-import CheckBoxDropdown from '../../components/CheckBoxDropdown';
+//import { MovieCard2 } from '../../components/MovieCard';
+//import CheckBoxDropdown from '../../components/CheckBoxDropdown';
+import FilterDrawer from '../../components/FilterDrawer';
 
 const Movies = () => {
 	const [durationRange, setDurationRange] = useState(0);
 
 	return (
-		<main>
-			{/* <header className="sticky top-0  bg-white dark:bg-gray-900">
-				<section>
-					<h1 className="mb-4 text-2xl font-extrabold text-center leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white">
-						Ver calificaciones de películas
-					</h1>
-				</section>
-				<section>
-					<h2 className="font-semibold text-center text-lg md:text-xl lg:text-2xl text-gray-900 dark:text-white">
-						filtrar por:{' '}
-					</h2>
-					<Range
-						title="Duración"
-						min={'60'}
-						max={'240'}
-						valueSelected={durationRange}
-						setValueSelected={setDurationRange}
-					/>
-
-					<CheckBoxDropdown />
-				</section>
-			</header> */}
+		<main className="">
+			<FilterDrawer
+				durationRange={durationRange}
+				setDurationRange={setDurationRange}
+			/>
 			<section className="flex flex-wrap gap-4 md:justify-evenly items-center">
 				{moviesrated.map(
 					({
@@ -66,3 +51,27 @@ const Movies = () => {
 };
 
 export default Movies;
+
+{
+	/* <header className="sticky top-0  bg-white dark:bg-gray-900">
+				<section>
+					<h1 className="mb-4 text-2xl font-extrabold text-center leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white">
+						Ver calificaciones de películas
+					</h1>
+				</section>
+				<section>
+					<h2 className="font-semibold text-center text-lg md:text-xl lg:text-2xl text-gray-900 dark:text-white">
+						filtrar por:{' '}
+					</h2>
+					<Range
+						title="Duración"
+						min={'60'}
+						max={'240'}
+						valueSelected={durationRange}
+						setValueSelected={setDurationRange}
+					/>
+
+					<CheckBoxDropdown />
+				</section>
+			</header> */
+}

@@ -1,7 +1,7 @@
 const Range = ({ title, min, max, valueSelected, setValueSelected }) => {
 	const handleChange = (e) => setValueSelected(e.target.value);
 	return (
-		<section className="p-3">
+		<section className="py-3">
 			<article>
 				<label
 					for="steps-range"
