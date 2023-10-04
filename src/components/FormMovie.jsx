@@ -1,8 +1,42 @@
 import CheckBoxGroup from './CheckBoxGroup';
+import ImageValidation from './ImageValidation';
+import { useState } from 'react';
 
 const FormMovie = () => {
+	const [imageUrl, setImageUrl] = useState('');
+	const [isValidImage, setIsValidImage] = useState(false);
+
+	const validateImage = () => {
+		fetch(imageUrl)
+			.then((res) => {
+
+				if (!res.ok) {
+					setIsValidImage(false);
+					return;
+				}
+
+				const contentType = res.headers.get('content-type');
+
+				if (!contentType || !contentType.startsWith('image')) {
+					setIsValidImage(false);
+					return;
+				}
+
+				setIsValidImage(true);
+			})
+			.catch(()=>{
+				setIsValidImage(false);
+			});
+	};
+
+	const handleSubmit = () => {
+		validateImage();
+	};
+
+	console.log(imageUrl);
+
 	return (
-		<form>
+		<form onSubmit={(e) => e.preventDefault()}>
 			<section className="grid md:grid-cols-2 md:gap-6">
 				<section className="relative z-0 w-full mb-6 group">
 					<input
@@ -81,13 +115,22 @@ const FormMovie = () => {
 				</section>
 			</section>
 
-			<section className="grid md:grid-cols-2 md:gap-6"></section>
+			<section className="relative z-0 w-full mb-6 group">
+				<ImageValidation
+					imageUrl={imageUrl}
+					setImageUrl={setImageUrl}
+					isValidImage={isValidImage}
+				/>
+			</section>
+
 			<section className="relative z-0 w-full mb-6 group">
 				<CheckBoxGroup />
 			</section>
+
 			<button
 				type="submit"
 				className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+				onClick={(e) => handleSubmit(e)}
 			>
 				Submit
 			</button>
@@ -96,6 +139,7 @@ const FormMovie = () => {
 };
 
 export default FormMovie;
+
 /* 
 <section className="relative z-0 w-full mb-6 group">
 					<input
