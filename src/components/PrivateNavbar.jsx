@@ -70,7 +70,7 @@ const PrivateNavbar = () => {
 					<section
 						className={` ${
 							openUserMenu ? 'block' : 'hidden'
-						} z-50 absolute right-2 top-10 my-4 text-base list-none bg-white sectionide-y sectionide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:sectionide-gray-600`}
+						} z-50 absolute top-10 my-4 text-base list-none bg-white sectionide-y sectionide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:sectionide-gray-600`}
 						id="user-dropdown"
 					>
 						<section className="px-4 py-3">
