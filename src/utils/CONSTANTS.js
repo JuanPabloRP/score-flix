@@ -1,5 +1,4 @@
 /* const GENRES = [
-	'Todos',
 	'Drama',
 	'Acción',
 	'Ciencia ficción',
@@ -11,16 +10,43 @@
 ];
  */
 
-const GENRES = {
-	DRAMA: 'Drama',
-	ACCION: 'Acción',
-	CIENCIA_FICCION: 'Ciencia ficción',
-	CRIMEN: 'Crimen',
-	HISTORIA: 'Historia',
-	AUTOBIOGRAFIA: 'Autobiografía',
-	AVENTURA: 'Aventura',
-	ROMANCE: 'Romance',
-	COMEDIA: 'Comedia',
-};
+const GENRES = [
+	{
+		genre: 'Drama',
+		isSelected: false,
+	},
+	{
+		genre: 'Acción',
+		isSelected: false,
+	},
+	{
+		genre: 'Ciencia ficción',
+		isSelected: false,
+	},
+	{
+		genre: 'Crimen',
+		isSelected: false,
+	},
+	{
+		genre: 'Historia',
+		isSelected: false,
+	},
+	{
+		genre: 'Autobiografía',
+		isSelected: false,
+	},
+	{
+		genre: 'Aventura',
+		isSelected: false,
+	},
+	{
+		genre: 'Romance',
+		isSelected: false,
+	},
+	{
+		genre: 'Comedia',
+		isSelected: false,
+	},
+];
 
 export { GENRES };

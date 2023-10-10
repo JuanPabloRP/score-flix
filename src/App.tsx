@@ -7,6 +7,8 @@ import PrivateLayout from './layouts/PrivateLayout';
 import Movies from './pages/Movies/Index';
 import NewMovie from './pages/Movies/NewMovie.jsx';
 import MyMovies from './pages/Movies/MyMovies.jsx';
+import NoMatch from './pages/NoMatch.jsx';
+import EditInfoMovie from './pages/Movies/EditInfoMovie.jsx';
 
 function App() {
 	return (
@@ -15,6 +17,7 @@ function App() {
 				<Routes>
 					<Route path="/sf" element={<PrivateLayout />}>
 						<Route path="mymovies" element={<MyMovies />} />
+						<Route path="mymovies/:id" element={<EditInfoMovie />} />
 						<Route path="new" element={<NewMovie />} />
 						<Route path="movies" element={<Movies />} />
 					</Route>
@@ -23,6 +26,7 @@ function App() {
 						<Route path="signup" element={<SignUp />} />
 					</Route>
 					<Route path="/" element={<Index />} />
+					<Route path="*" element={<NoMatch />} />
 				</Routes>
 			</Router>
 		</>

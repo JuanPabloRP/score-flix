@@ -38,7 +38,7 @@ const PrivateNavbar = () => {
 
 	return (
 		<nav className="sticky top-0 z-10 bg-white border-gray-200 dark:bg-gray-900">
-			<section className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+			<section className=" flex flex-wrap items-center justify-between mx-auto p-4">
 				<Link to="/sf/movies" className="flex items-center">
 					<img
 						src="https://flowbite.com/docs/images/logo.svg"
@@ -70,7 +70,7 @@ const PrivateNavbar = () => {
 					<section
 						className={` ${
 							openUserMenu ? 'block' : 'hidden'
-						} z-50 absolute top-10 my-4 text-base list-none bg-white sectionide-y sectionide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:sectionide-gray-600`}
+						} z-50 absolute top-10 right-2 my-4 text-base list-none bg-white sectionide-y sectionide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:sectionide-gray-600`}
 						id="user-dropdown"
 					>
 						<section className="px-4 py-3">

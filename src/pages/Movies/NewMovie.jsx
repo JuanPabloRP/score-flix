@@ -1,6 +1,9 @@
 import FormMovie from '../../components/FormMovie';
 
 const NewMovie = () => {
+	const onSubmit = (data) => {
+		console.log(data);
+	};
 	return (
 		<main>
 			<header>
@@ -9,7 +12,7 @@ const NewMovie = () => {
 				</h1>
 			</header>
 			<section className="max-w-2xl mx-auto">
-				<FormMovie />
+				<FormMovie isEditing={false} reviewToEdit={''} onSubmit={onSubmit} />
 			</section>
 		</main>
 	);
