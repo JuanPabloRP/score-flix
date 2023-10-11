@@ -61,7 +61,7 @@ const Movies = () => {
 											id,
 											title,
 											poster,
-											genre,
+											genres,
 											duration,
 											year,
 											score,
@@ -74,7 +74,7 @@ const Movies = () => {
 												key={id}
 												title={title}
 												poster={poster}
-												genre={genre}
+												genres={genres}
 												duration={duration}
 												year={year}
 												score={score}

@@ -1,8 +1,12 @@
+import { toast } from 'react-toastify';
+
 const DeleteItemModal = ({ open, setOpen, title, id, deleteMovie }) => {
 	const handleClose = () => setOpen(false);
 
 	const handleDelete = () => {
-		deleteMovie(id);
+		//deleteMovie(id);
+		toast.success('Pelicula eliminada');
+		console.log('borrando');
 		handleClose();
 	};
 

@@ -38,14 +38,35 @@ const ImageValidation = ({
 					className="rounded-full text-gray-500 dark:text-gray-400"
 					onClick={handleCheck}
 				>
-					{!imageUrl || (imageUrl && !isValidImage)
+					{!imageUrl
 						? '🔃'
-						: isValidImage && imageUrl
+						: isValidImage
 						? '✅'
 						: '❌'}
 				</button>
 			</section>
-			{isValidImage ? (
+			<p className="text-sm text-gray-500 dark:text-gray-400">
+				{!imageUrl
+					? 'Ingresa una URL de imagen y haz click en el botón para comprobar si es valida'
+					: isValidImage
+					? 'La imagen es valida'
+					: 'Esta URL no contiene una imagen valida o no se puede acceder a esta'}
+			</p>
+		</>
+	);
+};
+
+export default ImageValidation;
+/*
+{!imageUrl || (imageUrl && !isValidImage)
+						? '🔃'
+						: isValidImage
+						? '✅'
+						: '❌'}
+*/
+
+/*
+	{isValidImage ? (
 				<p className="text-sm text-gray-500 dark:text-gray-400">
 					La imagen es valida
 				</p>
@@ -54,8 +75,4 @@ const ImageValidation = ({
 					Esta URL no contiene una imagen valida o no se puede acceder a esta{' '}
 				</p>
 			)}
-		</>
-	);
-};
-
-export default ImageValidation;
+*/

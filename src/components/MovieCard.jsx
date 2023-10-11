@@ -3,12 +3,13 @@ import defectoImage from '../assets/img/defectoImage.jpg';
 import { useState } from 'react';
 import DeleteItemModal from './DeleteItemModal';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const MovieCard = ({
 	id,
 	title,
 	poster,
-	genre,
+	genres,
 	duration,
 	year,
 	score,
@@ -51,7 +52,7 @@ const MovieCard = ({
 		}
 	};
 
-	const handleUpdate = () => {};
+
 
 	const [open, setOpen] = useState(false);
 
@@ -75,7 +76,7 @@ const MovieCard = ({
 					<EditButtons
 						id={id}
 						handleModal={handleModal}
-						handleUpdate={handleUpdate}
+						
 					/>
 				) : (
 					<DefaultButtons
@@ -103,7 +104,7 @@ const MovieCard = ({
 					</h5>
 
 					<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-						<span>Generos: {genre}</span>
+						<span>Generos: {genres}</span>
 						<br />
 						<span>Duración: {duration} min</span>
 						<br />
@@ -179,8 +180,8 @@ const DefaultButtons = ({ handleLike, liked, disliked, handleDislike }) => {
 	);
 };
 
-const EditButtons = ({ id, handleModal, handleUpdate }) => {
-	const handleDelete = () => {};
+const EditButtons = ({ id, handleModal }) => {
+	
 	return (
 		<>
 			<button

@@ -1,13 +1,17 @@
 import CheckBoxGroup from './CheckBoxGroup';
 import ImageValidation from './ImageValidation';
 import { useState, useEffect } from 'react';
-import { GENRES } from '../utils/CONSTANTS';
+import { GENRES, genresArray } from '../utils/CONSTANTS';
 import useFormData from '../hooks/useFormData';
+import { toast } from 'react-toastify';
 
 const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 	const [imageUrl, setImageUrl] = useState('');
 	const [isValidImage, setIsValidImage] = useState(false);
-	const [genres, setGenres] = useState(GENRES);
+	const [genres, setGenres] = useState(genresArray);
+	const [checkedGenres, setCheckedGenres] = useState(
+		Array(genres.length).fill(false)
+	);
 	const { form, formData, updateFormData, setFormDataFields, setFormData } =
 		useFormData({
 			duration: '',
@@ -30,8 +34,7 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 
 				if (!contentType || !contentType.startsWith('image')) {
 					setIsValidImage(false);
-					console.log('error, no se obtuvo la img');
-					return;
+					throw new Error('error, no se obtuvo la img');
 				}
 
 				setIsValidImage(true);
@@ -42,41 +45,71 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 			})
 			.catch(() => {
 				setIsValidImage(false);
-				return;
+				throw new Error('error, no se obtuvo la img');
 			});
 	};
 
 	const handleGenreChange = (e, genreIndex) => {
-		const updateGenres = [...genres];
-		updateGenres[genreIndex].isSelected = !updateGenres[genreIndex].isSelected;
+		const updateCheckedGenres = [...checkedGenres];
+		updateCheckedGenres[genreIndex] = !updateCheckedGenres[genreIndex];
+		setCheckedGenres(updateCheckedGenres);
 
-		setGenres(updateGenres);
+		/*
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			genres: updateCheckedGenres,
+		}));
+
 		setFormData((prevFormData) => ({
 			...prevFormData,
 			genres: updateGenres,
 		}));
+		*/
 		//handleChange(e);
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		let selectedGenreList = genres
-			.filter((genre) => genre.isSelected)
-			.map((genre) => genre.genre);
+		setFormDataFields({
+			...formData,
+			genres: genres.filter((genre, index) => checkedGenres[index]),
+		});
 
-		setFormDataFields({ ...formData, genres: selectedGenreList });
+		//verificar que todos los campos esten llenos
+		if (
+			!formData.title ||
+			!formData.score ||
+			!formData.duration ||
+			!formData.imgUrl ||
+			!formData.year
+		) {
+			toast.error('Debes llenar todos los campos');
+			return;
+		}
+
+		if (!isValidImage) {
+			toast.error('La imagen no es valida');
+			return;
+		}
+
+		if (!formData.genres.length) {
+			toast.error('Debes elegir al menos un genero');
+			return;
+		}
 
 		if (isEditing) {
+			toast.success('Reseña actualizada');
 			onSubmit(reviewToEdit.id, formData);
 		} else {
+			toast.success('Reseña creada');
 			onSubmit(formData);
 		}
 	};
 
 	useEffect(() => {
 		if (reviewToEdit) {
-			console.log(reviewToEdit);
+			//console.log(reviewToEdit);
 			setFormData({
 				title: reviewToEdit.title || '',
 				score: reviewToEdit.score || '',
@@ -85,18 +118,35 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 				imgUrl: reviewToEdit.imgUrl || '',
 				year: reviewToEdit.year || '',
 			});
-			console.log(formData);
+			//console.log(formData);
 		}
 	}, [reviewToEdit]);
 
+	// genres selected
+	/*
+	 	useEffect(() => {
+		const updateCheckedGenres = [...checkedGenres];
+		genres.forEach((genre, index) => {
+			if (reviewToEdit) {
+				updateCheckedGenres[index] = reviewToEdit.genres.includes(genre);
+			} else {
+				updateCheckedGenres[index] = false;
+			}
+		});
+		setCheckedGenres(updateCheckedGenres);
+	}, []); */
+
+	// para que cuando quieara actualizar los campos ya tengan sus datos
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		console.log({ [name]: value });
+		//console.log({ [name]: value });
 		setFormData((prevFormData) => ({
 			...prevFormData,
 			[name]: { ...value },
 		}));
 	};
+
+	//console.log(formData);
 
 	return (
 		<form onSubmit={handleSubmit} onChange={updateFormData} ref={form}>
@@ -199,12 +249,33 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 			</section>
 
 			<section className="relative z-0 w-full mb-6 group">
-				<CheckBoxGroup
-					onChange={handleChange}
-					genres={genres}
-					handleGenreChange={handleGenreChange}
-					value={formData.genres}
-				/>
+				<section>
+					<h3 class="mb-5 text-sm  text-gray-900 dark:text-gray-400">
+						Elegir genero:
+					</h3>
+					<ul class="flex justify-start items-center flex-wrap w-full gap-6">
+						{genres.map((genre, index) => (
+							<li key={index}>
+								<input
+									type="checkbox"
+									id={`${genre}-option`}
+									name="genre"
+									value={genre}
+									class="hidden peer"
+									required=""
+									checked={checkedGenres[index]}
+									onChange={(e) => handleGenreChange(e, index)}
+								/>
+								<label
+									for={`${genre}-option`}
+									class="text-center p-1  text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+								>
+									{genre}
+								</label>
+							</li>
+						))}
+					</ul>
+				</section>
 			</section>
 
 			<button

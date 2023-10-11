@@ -46,7 +46,10 @@ const GENRES = [
 	{
 		genre: 'Comedia',
 		isSelected: false,
-	},
+	}
 ];
 
-export { GENRES };
+//genres ahora es un array
+const genresArray = GENRES.map((genre) => genre.genre);
+
+export { GENRES, genresArray };

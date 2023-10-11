@@ -24,10 +24,10 @@ const CheckBoxGroup = ({ genres, handleGenreChange, value }) => {
 			}
 		}
 	}; */
-	console.log(value);
+	
 	return (
 		<section>
-			<h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">
+			<h3 class="mb-5 text-sm  text-gray-900 dark:text-gray-400">
 				Elegir genero:
 			</h3>
 			<ul class="flex justify-start items-center flex-wrap w-full gap-6">
@@ -57,3 +57,11 @@ const CheckBoxGroup = ({ genres, handleGenreChange, value }) => {
 };
 
 export default CheckBoxGroup;
+/*
+<CheckBoxGroup
+					onChange={handleChange}
+					genres={genres}
+					handleGenreChange={handleGenreChange}
+					value={formData.genres}
+				/>
+ */

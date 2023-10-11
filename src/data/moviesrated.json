@@ -2,7 +2,7 @@
 	{
 		"dislikes": 200,
 		"duration": 142,
-		"genre": ["Drama"],
+		"genres": ["Drama"],
 		"id": "1",
 		"likes": 5000,
 		"poster": "shawshank_redemption.jpg",
@@ -15,7 +15,7 @@
 	{
 		"dislikes": 150,
 		"duration": 175,
-		"genre": ["Crime", "Drama"],
+		"genres": ["Crime", "Drama"],
 		"id": "2",
 		"likes": 4500,
 		"poster": "godfather.jpg",
@@ -28,7 +28,7 @@
 	{
 		"dislikes": 180,
 		"duration": 152,
-		"genre": ["Action", "Crime", "Drama"],
+		"genres": ["Action", "Crime", "Drama"],
 		"id": "3",
 		"likes": 4800,
 		"poster": "dark_knight.jpg",
@@ -41,7 +41,7 @@
 	{
 		"dislikes": 220,
 		"duration": 195,
-		"genre": ["Biography", "Drama", "History"],
+		"genres": ["Biography", "Drama", "History"],
 		"id": "4",
 		"likes": 4200,
 		"poster": "schindlers_list.jpg",
@@ -54,7 +54,7 @@
 	{
 		"dislikes": 210,
 		"duration": 154,
-		"genre": ["Crime", "Drama"],
+		"genres": ["Crime", "Drama"],
 		"id": "5",
 		"likes": 4300,
 		"poster": "pulp_fiction.jpg",
@@ -67,7 +67,7 @@
 	{
 		"dislikes": 190,
 		"duration": 201,
-		"genre": ["Action", "Adventure", "Drama"],
+		"genres": ["Action", "Adventure", "Drama"],
 		"id": "6",
 		"likes": 4400,
 		"poster": "lotr_return_of_the_king.jpg",
@@ -80,7 +80,7 @@
 	{
 		"dislikes": 160,
 		"duration": 139,
-		"genre": ["Drama"],
+		"genres": ["Drama"],
 		"id": "7",
 		"likes": 4700,
 		"poster": "fight_club.jpg",
@@ -93,7 +93,7 @@
 	{
 		"dislikes": 170,
 		"duration": 142,
-		"genre": ["Drama", "Romance"],
+		"genres": ["Drama", "Romance"],
 		"id": "8",
 		"likes": 4600,
 		"poster": "forrest_gump.jpg",
@@ -106,7 +106,7 @@
 	{
 		"dislikes": 180,
 		"duration": 148,
-		"genre": ["Action", "Adventure", " Sci-Fi"],
+		"genres": ["Action", "Adventure", " Sci-Fi"],
 		"id": "9",
 		"likes": 4900,
 		"poster": "inception.jpg",
@@ -119,7 +119,7 @@
 	{
 		"dislikes": 190,
 		"duration": 136,
-		"genre": ["Action", "Sci-Fi"],
+		"genres": ["Action", "Sci-Fi"],
 		"id": "10",
 		"likes": 4800,
 		"poster": "the_matrix.jpg",
