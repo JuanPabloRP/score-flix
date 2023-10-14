@@ -6,11 +6,20 @@ const useFormData = (initial) => {
 
 	const getFormData = () => {
 		const fd = new FormData(form.current);
+
 		const obj = {};
 		fd.forEach((value, key) => {
 			obj[key] = value;
 		});
 		return obj;
+
+		/*
+			return [...fd.entries()].reduce((obj, [key, value])=>{
+				obj[key] = value;
+				return obj;
+			}, {})
+
+		*/
 	};
 	const updateFormData = () => {
 		setFormData(getFormData());
