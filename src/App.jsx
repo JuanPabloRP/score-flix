@@ -2,13 +2,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Index from './pages/Index';
 import AuthLayout from './layouts/AuthLayout';
 import SignIn from './pages/Auth/SignIn';
-import SignUp from './pages/Auth/SignUp.jsx';
+import SignUp from './pages/Auth/SignUp';
 import PrivateLayout from './layouts/PrivateLayout';
 import Movies from './pages/Movies/Index';
-import NewMovie from './pages/Movies/NewMovie.jsx';
-import MyMovies from './pages/Movies/MyMovies.jsx';
-import NoMatch from './pages/NoMatch.jsx';
-import EditInfoMovie from './pages/Movies/EditInfoMovie.jsx';
+import NewMovie from './pages/Movies/NewMovie';
+import MyMovies from './pages/Movies/MyMovies';
+import NoMatch from './pages/NoMatch';
+import EditInfoMovie from './pages/Movies/EditInfoMovie';
 
 function App() {
 	return (
