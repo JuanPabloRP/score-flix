@@ -30,10 +30,7 @@ const MyMovies = () => {
 			.finally(() => {});
 	}, []);
 
-	const onSubmit = (...data) => {
-
-		console.log(data);
-	};
+	
 
 	if (loadingState === 'loading') {
 		return <Loading />;
@@ -49,7 +46,7 @@ const MyMovies = () => {
 				Mis reseñas
 			</h1>
 
-			<section className="flex justify-center items-center flex-wrap">
+			<section className="flex justify-center items-center flex-wrap gap-4">
 				{myMovies.map(
 					({
 						_id: id,
@@ -61,7 +58,7 @@ const MyMovies = () => {
 						rate,
 						likes,
 						dislikes,
-						userId
+						userId,
 					}) => (
 						<MovieCard
 							key={id}

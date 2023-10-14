@@ -3,53 +3,14 @@ import Footer from '../components/Footer';
 import PublicCard from '../components/PublicCard';
 import PublicNavbar from '../components/PublicNavbar';
 import { Link } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 
 const Index = () => {
-	const infoCards = [
-		{
-			id: uuidv4(),
-			title: '¿Quienes somos?',
-			description:
-				'esto es una description de prueba dnd dd hkjhjh hygfy tf jgkg ug gugug ugiugiu giug ug ugy rdrtd rts es e r drdt f kh klh',
-		},
-		{
-			id: uuidv4(),
-			title: '¿Quienes somos?',
-			description:
-				'esto es una description de prueba dnd dd hkjhjh hygfy tf jgkg ug gugug ugiugiu giug ug ugy rdrtd rts es e r drdt f kh klh',
-		},
-		{
-			id: uuidv4(),
-			title: '¿Quienes somos?',
-			description:
-				'esto es una description de prueba dnd dd hkjhjh hygfy tf jgkg ug gugug ugiugiu giug ug ugy rdrtd rts es e r drdt f kh klh',
-		},
-		{
-			id: uuidv4(),
-			title: '¿Quienes somos?',
-			description:
-				'esto es una description de prueba dnd dd hkjhjh hygfy tf jgkg ug gugug ugiugiu giug ug ugy rdrtd rts es e r drdt f kh klh',
-		},
-		{
-			id: uuidv4(),
-			title: '¿Quienes somos?',
-			description:
-				'esto es una description de prueba dnd dd hkjhjh hygfy tf jgkg ug gugug ugiugiu giug ug ugy rdrtd rts es e r drdt f kh klh',
-		},
-	];
-
 	return (
 		<>
 			<PublicNavbar />
 
 			<main className="bg-white border-gray-200 dark:bg-gray-900">
 				<HeaderIndex />
-				<section className="max-w-7xl  m-auto flex flex-wrap gap-3 justify-between">
-					{infoCards.map((info) => (
-						<PublicCard info={info} />
-					))}
-				</section>
 				<Footer />
 			</main>
 		</>
