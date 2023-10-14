@@ -2,30 +2,61 @@ import { useParams } from 'react-router-dom';
 import FormMovie from '../../components/FormMovie';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { URL_API } from '../../utils/CONSTANTS';
+import { toast } from 'react-toastify';
 
 const EditInfoMovie = () => {
 	const { id } = useParams();
 	const [movie, setMovie] = useState({});
 
-	const onSubmit = (...data) => {
-		console.log(data);
-	};
+	const onSubmit = (id, data) => {
+		console.log({ id, data });
 
-	useEffect(() => {
-		const url = '/src/data/moviesrated.json';
-		fetch(url)
+		fetch(`${URL_API}/${id}`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				id: id,
+				data: data,
+			}),
+		})
 			.then((res) => {
 				if (!res.ok) {
-					return;
+					throw new Error('Error al actulizar la reseña');
 				}
 
 				return res.json();
 			})
 			.then((data) => {
-				setMovie(data.filter((m) => m.id === id));
+				//console.log(data);
+				setMovie(data._id === id);
+				//console.log(movie);
+				toast.success('Se actualizó la reseña');
+			})
+			.catch((e) => {
+				console.error('Ha ocurrido un error al actulizar la reseña: ', e);
+				toast.error('Error al actulizar la reseña');
+			})
+			.finally(() => {});
+	};
+
+	useEffect(() => {
+		fetch(URL_API)
+			.then((res) => {
+				if (!res.ok) {
+					throw new Error('Error obtener las reseñas');
+				}
+
+				return res.json();
+			})
+			.then((data) => {
+				setMovie(data.filter((m) => m._id === id));
 			})
 			.catch((e) => {
 				console.error('Ha ocurrido un error al obtener los datos: ', e);
+				toast.error('Error al obtener los datos');
 			})
 			.finally(() => {});
 	}, []);

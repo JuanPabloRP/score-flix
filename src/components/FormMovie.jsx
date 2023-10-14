@@ -16,14 +16,13 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 	const { form, formData, updateFormData, setFormDataFields, setFormData } =
 		useFormData({
 			duration: 0,
-			genres: [],
+			genre: [],
 			poster: '',
 			rate: 0,
 			title: '',
 			date: '',
 		});
 
-	
 	const handleGenreChange = (e, genreIndex) => {
 		const updateCheckedGenres = [...checkedGenres];
 		updateCheckedGenres[genreIndex] = !updateCheckedGenres[genreIndex];
@@ -46,9 +45,12 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
+		const selectedGenres = genres.filter(
+			(genre, index) => checkedGenres[index]
+		);
 		setFormDataFields({
 			...formData,
-			genre: genres.filter((genre, index) => checkedGenres[index]),
+			genre: selectedGenres,
 			likes: 0,
 			dislikes: 0,
 		});
@@ -66,15 +68,12 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 			return;
 		}
 
-		validateImage({imageUrl: formData.poster, setIsValidImage: setIsValidImage})
-
-		
 		if (!isValidImage) {
 			toast.error('La imagen no es valida');
 			return;
 		}
 
-		if (!formData.genre.length) {
+		if (formData && formData.genre && !formData.genre.length) {
 			toast.error('Debes elegir al menos un genero');
 			return;
 		}
@@ -93,11 +92,17 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 				title: reviewToEdit.title || '',
 				rate: reviewToEdit.rate || 0,
 				duration: reviewToEdit.duration || 0,
-				genres: reviewToEdit.genre || [],
+				genre: reviewToEdit.genre || [],
 				poster: reviewToEdit.poster || '',
 				date: reviewToEdit.date || '',
 			});
-			//console.log(formData);
+
+			setImageUrl(reviewToEdit.poster || '');
+			setIsValidImage(true);
+
+			setCheckedGenres(
+				reviewToEdit.genre.map((genre) => genres.includes(genre))
+			);
 		}
 	}, [reviewToEdit]);
 
@@ -124,8 +129,6 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 			[name]: { ...value },
 		}));
 	};
-
-	//console.log(formData);
 
 	return (
 		<form onSubmit={handleSubmit} onChange={updateFormData} ref={form}>

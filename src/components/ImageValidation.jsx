@@ -41,6 +41,7 @@ const ImageValidation = ({
 					Url imagen
 				</label>
 				<button
+					type="button"
 					className="rounded-full text-gray-500 dark:text-gray-400"
 					onClick={handleCheck}
 				>
