@@ -1,14 +1,66 @@
+import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { URL_API } from '../utils/CONSTANTS';
+import { useEffect } from 'react';
 
-const DeleteItemModal = ({ open, setOpen, title, id, deleteMovie }) => {
+const DeleteItemModal = ({ open, setOpen, title, id, setMyMovies }) => {
+	const [deleted, setDeleted] = useState(false);
 	const handleClose = () => setOpen(false);
 
 	const handleDelete = () => {
 		//deleteMovie(id);
-		toast.success('Pelicula eliminada');
-		console.log('borrando');
+		//const url = '/src/data/moviesrated.json';
+
+		fetch(URL_API, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				id: id,
+			}),
+		})
+			.then((res) => {
+				if (!res.ok) {
+					throw new Error('Error al eliminar la reseña');
+				}
+
+				toast.success('Reseña eliminada');
+				return res.json();
+			})
+			.then((data) => {
+				console.log(data);
+				setDeleted(true);
+			})
+			.catch((e) => {
+				toast.error('Error al eliminar reseña');
+				console.error('Ha ocurrido un error al eliminar la reseña: ', e);
+			})
+			.finally(() => {});
+
 		handleClose();
 	};
+
+	useEffect(() => {
+		if (deleted) {
+			fetch(URL_API)
+				.then((res) => {
+					if (!res.ok) {
+						throw new Error('Error al obtener las reseñas');
+					}
+
+					return res.json();
+				})
+				.then((data) => {
+					setMyMovies(data);
+				})
+				.catch((e) => {
+					console.error('Ha ocurrido un error al obtener los datos: ', e);
+					toast.error('Error al obtener las reseñas');
+				})
+				.finally(() => {});
+		}
+	}, [deleted]);
 
 	return (
 		<article

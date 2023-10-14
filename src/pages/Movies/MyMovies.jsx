@@ -3,17 +3,18 @@ import MovieCard from '../../components/MovieCard';
 //import moviesscored from '../../data/moviesscored.json';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
+import { URL_API } from '../../utils/CONSTANTS';
 
 const MyMovies = () => {
 	const [myMovies, setMyMovies] = useState([]);
 	const [loadingState, setLoadingState] = useState('loading');
 
 	useEffect(() => {
-		const url = '/src/data/moviesrated.json';
-		fetch(url)
+		//const url = '/src/data/moviesrated.json';
+		fetch(URL_API)
 			.then((res) => {
 				if (!res.ok) {
-					return
+					throw new Error('Error obtener las reseñas');
 				}
 
 				return res.json();
@@ -30,6 +31,7 @@ const MyMovies = () => {
 	}, []);
 
 	const onSubmit = (...data) => {
+
 		console.log(data);
 	};
 
@@ -48,39 +50,36 @@ const MyMovies = () => {
 			</h1>
 
 			<section className="flex justify-center items-center flex-wrap">
-				{myMovies
-					.filter(({ userId }) => userId === 'user123')
-					.map(
-						({
-							id,
-							title,
-							poster,
-							genres,
-							duration,
-							year,
-							score,
-							likes,
-							dislikes,
-							userId,
-							imgUrl,
-						}) => (
-							<MovieCard
-								key={id}
-								id={id}
-								title={title}
-								poster={poster}
-								genres={genres}
-								duration={duration}
-								year={year}
-								score={score}
-								likes={likes}
-								dislikes={dislikes}
-								userId={userId}
-								isEditing={true}
-								imgUrl={imgUrl}
-							/>
-						)
-					)}
+				{myMovies.map(
+					({
+						_id: id,
+						title,
+						poster,
+						genre,
+						duration,
+						date,
+						rate,
+						likes,
+						dislikes,
+						userId
+					}) => (
+						<MovieCard
+							key={id}
+							id={id}
+							title={title}
+							poster={poster}
+							genre={genre}
+							duration={duration}
+							date={date}
+							rate={rate}
+							likes={likes}
+							dislikes={dislikes}
+							userId={userId}
+							isEditing={true}
+							setMyMovies={setMyMovies}
+						/>
+					)
+				)}
 			</section>
 		</main>
 	);

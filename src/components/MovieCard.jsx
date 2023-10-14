@@ -4,22 +4,25 @@ import { useState } from 'react';
 import DeleteItemModal from './DeleteItemModal';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 const MovieCard = ({
 	id,
 	title,
 	poster,
-	genres,
+	genre,
 	duration,
-	year,
-	score,
+	date,
+	director,
+	rate,
 	likes,
 	dislikes,
 	userId,
-	imgUrl,
 	useImagenDefecto,
 	isEditing,
 	deleteMovie,
+	setMyMovies,
+	
 }) => {
 	const [liked, setLiked] = useState({
 		likes: likes,
@@ -52,13 +55,13 @@ const MovieCard = ({
 		}
 	};
 
-
-
 	const [open, setOpen] = useState(false);
 
 	const handleModal = () => {
 		setOpen(!open);
 	};
+
+	//console.log({ poster });
 	return (
 		<section id={id} class=" max-w-sm flex flex-col md:flex-row">
 			{/* Modal */}
@@ -68,16 +71,13 @@ const MovieCard = ({
 				title={title}
 				id={id}
 				deleteMovie={deleteMovie}
+				setMyMovies={(setMyMovies)}
 			/>
 
 			{/* Botones de los lados ( like-dislike / delete-edit) */}
 			<aside className="flex items-center justify-center md:flex-col md:justify-start gap-1 p-2 text-white">
 				{isEditing ? (
-					<EditButtons
-						id={id}
-						handleModal={handleModal}
-						
-					/>
+					<EditButtons id={id} handleModal={handleModal} />
 				) : (
 					<DefaultButtons
 						handleLike={handleLike}
@@ -93,7 +93,7 @@ const MovieCard = ({
 				<figure className="rounded-t-lg">
 					<img
 						class="rounded-t-lg"
-						src={useImagenDefecto ? defectoImage : imgUrl}
+						src={useImagenDefecto ? defectoImage : poster}
 						alt={`${title} image`}
 					/>
 				</figure>
@@ -104,13 +104,15 @@ const MovieCard = ({
 					</h5>
 
 					<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-						<span>Generos: {genres}</span>
+						<span>Generos: {genre.join(', ')}</span>
 						<br />
 						<span>Duración: {duration} min</span>
 						<br />
-						<span>Año de estreno: {year}</span>
+						<span>Año de estreno: {date}</span>
 						<br />
-						<span>Calificación: {score}</span>
+						<span>Calificación: {rate}</span>
+						<br />
+						{director ? <span>Director: {director}</span> : null}
 					</p>
 				</section>
 			</section>
@@ -181,7 +183,6 @@ const DefaultButtons = ({ handleLike, liked, disliked, handleDislike }) => {
 };
 
 const EditButtons = ({ id, handleModal }) => {
-	
 	return (
 		<>
 			<button
@@ -213,7 +214,6 @@ const EditButtons = ({ id, handleModal }) => {
 						fill="currentColor"
 					></path>
 				</svg>
-				{/* <span>{liked.likes}</span> */}
 			</button>
 			<Link
 				className={`text-center flex justify-center items-center  w-fit px-3 rounded-lg py-2  text-yellow-100 

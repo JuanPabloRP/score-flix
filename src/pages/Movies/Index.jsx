@@ -8,6 +8,8 @@ import MovieCard from '../../components/MovieCard';
 import FilterDrawer from '../../components/FilterDrawer';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
+import { URL_API } from '../../utils/CONSTANTS';
+
 
 const Movies = () => {
 	const [durationRange, setDurationRange] = useState(0);
@@ -16,17 +18,18 @@ const Movies = () => {
 	const [error, setError] = useState(false);
 
 	useEffect(() => {
-		const url = '/src/data/moviesrated.json';
-		fetch(url)
+		//const url = '/src/data/moviesrated.json';
+		fetch(URL_API)
 			.then((res) => {
 				if (!res.ok) {
 					setError(true);
-					return new Error('A');
+					throw Error;
 				}
 
 				return res.json();
 			})
 			.then((data) => {
+				console.log(data);
 				setMovies(data);
 			})
 			.catch((e) => {
@@ -38,59 +41,53 @@ const Movies = () => {
 			});
 	}, []);
 
+	if (loading) {
+		return <Loading />;
+	}
+
+	if (error) {
+		<Error />;
+	}
+
 	return (
 		<main className="">
 			<>
-				{loading ? (
-					<>
-						<Loading />
-					</>
-				) : (
-					<>
-						{error ? (
-							<Error />
-						) : (
-							<>
-								<FilterDrawer
-									durationRange={durationRange}
-									setDurationRange={setDurationRange}
-								/>
-								<section className="flex flex-wrap gap-4 md:justify-evenly items-center">
-									{movies.map(
-										({
-											id,
-											title,
-											poster,
-											genres,
-											duration,
-											year,
-											score,
-											likes,
-											dislikes,
-											userId,
-											imgUrl,
-										}) => (
-											<MovieCard
-												key={id}
-												title={title}
-												poster={poster}
-												genres={genres}
-												duration={duration}
-												year={year}
-												score={score}
-												likes={likes}
-												dislikes={dislikes}
-												userId={userId}
-												imgUrl={imgUrl}
-												useImagenDefecto={false}
-											/>
-										)
-									)}
-								</section>
-							</>
-						)}
-					</>
-				)}
+				<FilterDrawer
+					durationRange={durationRange}
+					setDurationRange={setDurationRange}
+				/>
+				<section className="flex flex-wrap gap-4 md:justify-evenly items-center">
+					{movies.map(
+						({
+							_id: id,
+							title,
+							poster,
+							genre,
+							duration,
+							date,
+							director,
+							rate,
+							likes,
+							dislikes,
+							userId,
+						}) => (
+							<MovieCard
+								key={id}
+								title={title}
+								poster={poster}
+								genre={genre}
+								duration={duration}
+								date={date}
+								rate={rate}
+								director={director}
+								likes={likes}
+								dislikes={dislikes}
+								userId={userId}
+								useImagenDefecto={false}
+							/>
+						)
+					)}
+				</section>
 			</>
 		</main>
 	);

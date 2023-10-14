@@ -1,9 +1,10 @@
-import CheckBoxGroup from './CheckBoxGroup';
+//import CheckBoxGroup from './CheckBoxGroup';
 import ImageValidation from './ImageValidation';
 import { useState, useEffect } from 'react';
-import { GENRES, genresArray } from '../utils/CONSTANTS';
+import { genresArray, URL_API } from '../utils/CONSTANTS';
 import useFormData from '../hooks/useFormData';
 import { toast } from 'react-toastify';
+import { validateImage } from '../utils/ValidateImage';
 
 const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 	const [imageUrl, setImageUrl] = useState('');
@@ -14,41 +15,15 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 	);
 	const { form, formData, updateFormData, setFormDataFields, setFormData } =
 		useFormData({
-			duration: '',
+			duration: 0,
 			genres: [],
-			imgUrl: '',
-			score: '',
+			poster: '',
+			rate: 0,
 			title: '',
-			year: '',
+			date: '',
 		});
 
-	const validateImage = () => {
-		fetch(imageUrl)
-			.then((res) => {
-				if (!res.ok) {
-					setIsValidImage(false);
-					return;
-				}
-
-				const contentType = res.headers.get('content-type');
-
-				if (!contentType || !contentType.startsWith('image')) {
-					setIsValidImage(false);
-					throw new Error('error, no se obtuvo la img');
-				}
-
-				setIsValidImage(true);
-				console.log('se obtuvo la img');
-				//para tener la url de la imagen en el formdata
-				//setFormDataFields(imageUrl);
-				//updateFormData({ ...formData, imgUrl: imageUrl });
-			})
-			.catch(() => {
-				setIsValidImage(false);
-				throw new Error('error, no se obtuvo la img');
-			});
-	};
-
+	
 	const handleGenreChange = (e, genreIndex) => {
 		const updateCheckedGenres = [...checkedGenres];
 		updateCheckedGenres[genreIndex] = !updateCheckedGenres[genreIndex];
@@ -73,50 +48,54 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 
 		setFormDataFields({
 			...formData,
-			genres: genres.filter((genre, index) => checkedGenres[index]),
+			genre: genres.filter((genre, index) => checkedGenres[index]),
+			likes: 0,
+			dislikes: 0,
 		});
 
 		//verificar que todos los campos esten llenos
+		console.log(formData);
 		if (
 			!formData.title ||
-			!formData.score ||
+			!formData.rate ||
 			!formData.duration ||
-			!formData.imgUrl ||
-			!formData.year
+			!formData.poster ||
+			!formData.date
 		) {
 			toast.error('Debes llenar todos los campos');
 			return;
 		}
 
+		validateImage({imageUrl: formData.poster, setIsValidImage: setIsValidImage})
+
+		
 		if (!isValidImage) {
 			toast.error('La imagen no es valida');
 			return;
 		}
 
-		if (!formData.genres.length) {
+		if (!formData.genre.length) {
 			toast.error('Debes elegir al menos un genero');
 			return;
 		}
 
 		if (isEditing) {
-			toast.success('Reseña actualizada');
-			onSubmit(reviewToEdit.id, formData);
+			onSubmit(reviewToEdit._id, formData);
 		} else {
-			toast.success('Reseña creada');
 			onSubmit(formData);
 		}
 	};
 
 	useEffect(() => {
 		if (reviewToEdit) {
-			//console.log(reviewToEdit);
+			console.log(reviewToEdit);
 			setFormData({
 				title: reviewToEdit.title || '',
-				score: reviewToEdit.score || '',
-				duration: reviewToEdit.duration || '',
-				genres: reviewToEdit.genres || [],
-				imgUrl: reviewToEdit.imgUrl || '',
-				year: reviewToEdit.year || '',
+				rate: reviewToEdit.rate || 0,
+				duration: reviewToEdit.duration || 0,
+				genres: reviewToEdit.genre || [],
+				poster: reviewToEdit.poster || '',
+				date: reviewToEdit.date || '',
 			});
 			//console.log(formData);
 		}
@@ -173,10 +152,10 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 				<section className="relative z-0 w-full mb-6 group">
 					<input
 						type="number"
-						name="score"
-						id="score"
+						name="rate"
+						id="rate"
 						onChange={handleChange}
-						value={formData.score}
+						value={formData.rate}
 						className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 						placeholder=" "
 						required
@@ -186,7 +165,7 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 						pattern={'[0-9]*[.][0-9]*'}
 					/>
 					<label
-						for="score"
+						for="rate"
 						className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 					>
 						Puntuación (Ej: 9.4)
@@ -218,10 +197,10 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 				<section className="relative z-0 w-full mb-6 group">
 					<input
 						type="date"
-						name="year"
-						id="year"
+						name="date"
+						id="date"
 						onChange={handleChange}
-						value={formData.year}
+						value={formData.date}
 						className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 						placeholder=" "
 						required
@@ -229,7 +208,7 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 						max={'2024-12-31'}
 					/>
 					<label
-						for="year"
+						for="date"
 						className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 					>
 						Fecha de estreno
@@ -239,12 +218,12 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 
 			<section className="relative z-0 w-full mb-6 group">
 				<ImageValidation
-					imageUrl={imageUrl}
+					poster={imageUrl}
 					setImageUrl={setImageUrl}
 					isValidImage={isValidImage}
-					validateImage={validateImage}
+					setIsValidImage={setIsValidImage}
 					onChange={handleChange}
-					value={formData.imgUrl}
+					value={formData.poster}
 				/>
 			</section>
 
@@ -259,7 +238,6 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 								<input
 									type="checkbox"
 									id={`${genre}-option`}
-									name="genre"
 									value={genre}
 									class="hidden peer"
 									required=""
