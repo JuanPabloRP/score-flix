@@ -151,7 +151,7 @@ const SignUp = () => {
 							Confirm password
 						</label>
 					</section>
-{/* 
+					{/* 
 					<DropDown
 						label="Rol deseado:"
 						name="rol"
@@ -159,17 +159,22 @@ const SignUp = () => {
 						required={true}
 						options={Enum_Rol}
 						hidden={false}
-					/>
- */}
-					<section className="flex w-full">
+					/>*/}
+
+					{/* <section className="flex w-full">
 						<ButtonLoading
 							disabled={false}
 							loading={false}
 							text={'Regístrarse'}
 						/>
-					</section>
-					<section>
-						<Link to={'/sf/movies'}>Ir</Link>
+					</section> */}
+					<section className="flex w-full">
+						<Link
+							className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full mx-auto sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+							to={'/sf/movies'}
+						>
+							Regístrarse
+						</Link>
 					</section>
 				</form>
 
