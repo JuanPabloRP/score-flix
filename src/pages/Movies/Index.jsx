@@ -46,7 +46,7 @@ const Movies = () => {
 	}
 
 	if (error) {
-		<Error />;
+		return <Error />;
 	}
 
 	return (
@@ -56,7 +56,7 @@ const Movies = () => {
 					durationRange={durationRange}
 					setDurationRange={setDurationRange}
 				/>
-				<section className="flex flex-wrap gap-4 md:justify-evenly items-center">
+				<section className="flex flex-wrap gap-4 md:justify-evenly justify-center items-center">
 					{movies.map(
 						({
 							_id: id,

@@ -71,7 +71,7 @@ const MovieCard = ({
 				title={title}
 				id={id}
 				deleteMovie={deleteMovie}
-				setMyMovies={(setMyMovies)}
+				setMyMovies={setMyMovies}
 			/>
 
 			{/* Botones de los lados ( like-dislike / delete-edit) */}
