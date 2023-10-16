@@ -1,5 +1,5 @@
 import React from 'react';
-import defectoImage from '../assets/img/defectoImage.jpg';
+import defectoImage from '../assets/img/defectoImage.png';
 import { useState } from 'react';
 import DeleteItemModal from './DeleteItemModal';
 import { Link } from 'react-router-dom';
@@ -22,7 +22,6 @@ const MovieCard = ({
 	isEditing,
 	deleteMovie,
 	setMyMovies,
-	
 }) => {
 	const [liked, setLiked] = useState({
 		likes: likes,
@@ -95,6 +94,9 @@ const MovieCard = ({
 						class="rounded-t-lg"
 						src={useImagenDefecto ? defectoImage : poster}
 						alt={`${title} image`}
+						onError={(e) => {
+							e.target.src = defectoImage;
+						}}
 					/>
 				</figure>
 
