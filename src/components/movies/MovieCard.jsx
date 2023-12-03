@@ -1,10 +1,9 @@
 import React from 'react';
-import defectoImage from '../assets/img/defectoImage.png';
-import { useState } from 'react';
+import defectoImage from '../../assets/img/defectoImage.png';
+import { useState, useEffect } from 'react';
 import DeleteItemModal from './DeleteItemModal';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
 
 const MovieCard = ({
 	id,

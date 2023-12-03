@@ -1,20 +1,24 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { URL_API } from '../utils/CONSTANTS';
+import { URL_API } from '../../utils/CONSTANTS';
 import { useEffect } from 'react';
+import { useUserContext } from '../../context/userContext';
 
 const DeleteItemModal = ({ open, setOpen, title, id, setMyMovies }) => {
 	const [deleted, setDeleted] = useState(false);
-	const handleClose = () => setOpen(false);
 
+	const { userData } = useUserContext();
+
+	const handleClose = () => setOpen(false);
 	const handleDelete = () => {
 		//deleteMovie(id);
 		//const url = '/src/data/moviesrated.json';
 
-		fetch(URL_API, {
+		fetch(`${URL_API}/reviews`, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
+				authorization: localStorage.getItem('token'),
 			},
 			body: JSON.stringify({
 				id: id,
@@ -43,7 +47,13 @@ const DeleteItemModal = ({ open, setOpen, title, id, setMyMovies }) => {
 
 	useEffect(() => {
 		if (deleted) {
-			fetch(URL_API)
+			fetch(`${URL_API}/reviews/${userData.userId}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					authorization: localStorage.getItem('token'),
+				},
+			})
 				.then((res) => {
 					if (!res.ok) {
 						throw new Error('Error al obtener las reseñas');

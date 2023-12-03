@@ -1,4 +1,4 @@
-import { validateImage } from '../utils/ValidateImage';
+import { validateImage } from '../../utils/ValidateImage';
 
 const ImageValidation = ({
 	poster,

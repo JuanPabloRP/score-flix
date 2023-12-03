@@ -1,7 +1,7 @@
-import ImageValidation from './ImageValidation';
+import ImageValidation from '../shared/ImageValidation';
 import { useState, useEffect } from 'react';
-import { genresArray } from '../utils/CONSTANTS';
-import useFormData from '../hooks/useFormData';
+import { genresArray } from '../../utils/CONSTANTS';
+import useFormData from '../../hooks/useFormData';
 import { toast } from 'react-toastify';
 
 const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
