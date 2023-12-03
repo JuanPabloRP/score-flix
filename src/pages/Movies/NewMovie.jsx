@@ -1,16 +1,20 @@
-import FormMovie from '../../components/FormMovie';
+import FormMovie from '../../components/movies/FormMovie';
 import { URL_API } from '../../utils/CONSTANTS';
 import { toast } from 'react-toastify';
+import { useUserContext } from '../../context/userContext';
 
 const NewMovie = () => {
+	const { userData } = useUserContext();
+
 	const onSubmit = (data) => {
 		console.log(data);
-		fetch(URL_API, {
+		fetch(`${URL_API}/reviews`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+				authorization: localStorage.getItem('token'),
 			},
-			body: JSON.stringify(data),
+			body: JSON.stringify({ ...data, userId: userData.userId }),
 		})
 			.then((res) => {
 				if (!res.ok) {

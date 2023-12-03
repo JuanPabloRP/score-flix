@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import FormMovie from '../../components/FormMovie';
+import FormMovie from '../../components/movies/FormMovie';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { URL_API } from '../../utils/CONSTANTS';
@@ -12,7 +12,7 @@ const EditInfoMovie = () => {
 	const onSubmit = (id, data) => {
 		console.log({ id, data });
 
-		fetch(`${URL_API}/${id}`, {
+		fetch(`${URL_API}/reviews/${id}`, {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',

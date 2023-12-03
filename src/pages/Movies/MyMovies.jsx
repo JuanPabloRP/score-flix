@@ -1,36 +1,49 @@
 import { useState, useEffect } from 'react';
-import MovieCard from '../../components/MovieCard';
-//import moviesscored from '../../data/moviesscored.json';
+import MovieCard from '../../components/movies/MovieCard';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import { URL_API } from '../../utils/CONSTANTS';
+import { useUserContext } from '../../context/userContext';
 
 const MyMovies = () => {
-	const [myMovies, setMyMovies] = useState([]);
+	const [myReviews, setMyReviews] = useState([]);
 	const [loadingState, setLoadingState] = useState('loading');
 
+	const { userData } = useUserContext();
+
 	useEffect(() => {
-		//const url = '/src/data/moviesrated.json';
-		fetch(URL_API)
-			.then((res) => {
+		const fetchMyReviews = async () => {
+			console.log('userData: ', userData);
+			if (!userData.userId) {
+				return;
+			}
+
+			try {
+				const res = await fetch(`${URL_API}/reviews/${userData.userId}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						authorization: localStorage.getItem('token'),
+					},
+				});
+
 				if (!res.ok) {
-					throw new Error('Error obtener las reseñas');
+					const eee = await res.json();
+					console.error(eee);
+					throw new Error(eee);
 				}
 
-				return res.json();
-			})
-			.then((data) => {
-				setMyMovies(data);
+				const data = await res.json();
+				console.log(data);
+				setMyReviews(data);
 				setLoadingState('loaded');
-			})
-			.catch((e) => {
-				console.error('Ha ocurrido un error al obtener los datos: ', e);
+			} catch (e) {
+				console.log(e);
 				setLoadingState('error');
-			})
-			.finally(() => {});
+			}
+		};
+		fetchMyReviews();
 	}, []);
-
-	
 
 	if (loadingState === 'loading') {
 		return <Loading />;
@@ -47,7 +60,12 @@ const MyMovies = () => {
 			</h1>
 
 			<section className="flex justify-center items-center flex-wrap gap-4">
-				{myMovies.map(
+				{myReviews.length === 0 && (Error || Loading) && (
+					<h2 className="text-center my-5 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+						Aún no has escrito ninguna reseña
+					</h2>
+				)}
+				{myReviews.map(
 					({
 						_id: id,
 						title,
@@ -73,7 +91,7 @@ const MyMovies = () => {
 							dislikes={dislikes}
 							userId={userId}
 							isEditing={true}
-							setMyMovies={setMyMovies}
+							setMyMovies={setMyReviews}
 						/>
 					)
 				)}

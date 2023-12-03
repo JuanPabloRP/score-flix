@@ -2,10 +2,10 @@ import React from 'react';
 //import moviesrated from '../../data/moviesrated.json';
 import { useState, useEffect } from 'react';
 //import Range from '../../components/Range';
-import MovieCard from '../../components/MovieCard';
+import MovieCard from '../../components/movies/MovieCard';
 //import { MovieCard2 } from '../../components/MovieCard';
 //import CheckBoxDropdown from '../../components/CheckBoxDropdown';
-import FilterDrawer from '../../components/FilterDrawer';
+import FilterDrawer from '../../components/movies/FilterDrawer';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import { URL_API } from '../../utils/CONSTANTS';
@@ -17,9 +17,16 @@ const Movies = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 
+
 	useEffect(() => {
 		//const url = '/src/data/moviesrated.json';
-		fetch(URL_API)
+		fetch(`${URL_API}/reviews`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				authorization: localStorage.getItem('token'),
+			},
+		})
 			.then((res) => {
 				if (!res.ok) {
 					setError(true);
@@ -34,7 +41,7 @@ const Movies = () => {
 			})
 			.catch((e) => {
 				console.error('Ha ocurrido un error al obtener los datos: ', e);
-				return new Error('A');
+				throw new Error('A');
 			})
 			.finally(() => {
 				setLoading(false);
