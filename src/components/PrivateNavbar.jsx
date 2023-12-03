@@ -1,9 +1,21 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useUserContext } from '../context/userContext';
+import { useAuthContext } from '../context/authContext';
 
 const PrivateNavbar = () => {
 	const [openUserMenu, setOpenUserMenu] = useState(false);
 	const [openNavMenu, setOpenNavMenu] = useState(false);
+
+	const { setIsLogged, userData } = useUserContext();
+	const { setToken } = useAuthContext();
+
+	const navigate = useNavigate();
+	const handleLogout = () => {
+		setToken('');
+		setIsLogged(false);
+		navigate('/');
+	};
 
 	const routes = [
 		{
@@ -20,19 +32,6 @@ const PrivateNavbar = () => {
 			id: 3,
 			name: 'Modificar',
 			link: '/sf/mymovies',
-		},
-	];
-
-	const userOptions = [
-		{
-			id: 1,
-			name: 'Perfil',
-			link: '/sf/user',
-		},
-		{
-			id: 9,
-			name: 'Cerrar sesión',
-			link: '/',
 		},
 	];
 
@@ -61,11 +60,7 @@ const PrivateNavbar = () => {
 						onClick={() => setOpenUserMenu(!openUserMenu)}
 					>
 						<span className="sr-only">Open user menu</span>
-						<img
-							className="w-8 h-8 rounded-full"
-							src="/docs/images/people/profile-picture-3.jpg"
-							alt="user photo"
-						/>
+						<img className="w-8 h-8 rounded-full" src="" alt="user photo" />
 					</button>
 					<section
 						className={` ${
@@ -75,23 +70,30 @@ const PrivateNavbar = () => {
 					>
 						<section className="px-4 py-3">
 							<span className="block text-sm text-gray-900 dark:text-white">
-								Nombre usuario
+								{userData.fullName || 'Nombre de usuario'}
 							</span>
 							<span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-								user@epic.dou
+								{userData.email || 'Correo electrónico'}
 							</span>
 						</section>
 						<ul className="py-2" aria-labelledby="user-menu-button">
-							{userOptions.map(({ id, name, link }) => (
-								<li key={id}>
-									<Link
-										to={link}
-										className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-									>
-										{name}
-									</Link>
-								</li>
-							))}
+							<li>
+								<Link
+									to={'/sf/user'}
+									className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+								>
+									Perfil
+								</Link>
+							</li>
+							<li>
+								<button
+									onClick={() => handleLogout()}
+									to=""
+									className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+								>
+									Cerrar sesión
+								</button>
+							</li>
 						</ul>
 					</section>
 

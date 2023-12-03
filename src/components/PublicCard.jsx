@@ -2,6 +2,8 @@
 const PublicCard = ({info}) => {
 	const {id, title, description} = info;
 
+	
+
 	return (
 		<>
 				<section
