@@ -61,7 +61,7 @@ const MovieCard = ({
 
 	//console.log({ poster });
 	return (
-		<section id={id} class=" max-w-sm flex flex-col md:flex-row">
+		<section id={id} className=" max-w-sm flex flex-col md:flex-row">
 			{/* Modal */}
 			<DeleteItemModal
 				open={open}
@@ -90,7 +90,7 @@ const MovieCard = ({
 			<section className="bg-white border border-gray-300 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 				<figure className="rounded-t-lg">
 					<img
-						class="rounded-t-lg"
+						className="rounded-t-lg"
 						src={useImagenDefecto ? defectoImage : poster}
 						alt={`${title} image`}
 						onError={(e) => {
@@ -99,12 +99,12 @@ const MovieCard = ({
 					/>
 				</figure>
 
-				<section class="p-5">
-					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+				<section className="p-5">
+					<h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
 						{title}
 					</h5>
 
-					<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+					<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
 						<span>Generos: {genre.join(', ')}</span>
 						<br />
 						<span>Duración: {duration} min</span>
@@ -132,7 +132,7 @@ const DefaultButtons = ({ handleLike, liked, disliked, handleDislike }) => {
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="icon icon-tabler icon-tabler-arrow-big-up-filled"
+					className="icon icon-tabler icon-tabler-arrow-big-up-filled"
 					width="24"
 					height="24"
 					viewBox="0 0 24 24"
@@ -173,7 +173,7 @@ const DefaultButtons = ({ handleLike, liked, disliked, handleDislike }) => {
 					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 					<path
 						d="M10 2l-.15 .005a2 2 0 0 0 -1.85 1.995v6.999l-2.586 .001a2 2 0 0 0 -1.414 3.414l6.586 6.586a2 2 0 0 0 2.828 0l6.586 -6.586a2 2 0 0 0 .434 -2.18l-.068 -.145a2 2 0 0 0 -1.78 -1.089l-2.586 -.001v-6.999a2 2 0 0 0 -2 -2h-4z"
-						stroke-width="0"
+						strokeWidth="0"
 						fill="currentColor"
 					></path>
 				</svg>
@@ -193,7 +193,7 @@ const EditButtons = ({ id, handleModal }) => {
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="icon icon-tabler icon-tabler-trash-x-filled"
+					className="icon icon-tabler icon-tabler-trash-x-filled"
 					width="24"
 					height="24"
 					viewBox="0 0 24 24"
@@ -224,7 +224,7 @@ const EditButtons = ({ id, handleModal }) => {
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="icon icon-tabler icon-tabler-pencil-minus"
+					className="icon icon-tabler icon-tabler-pencil-minus"
 					width="24"
 					height="24"
 					viewBox="0 0 24 24"

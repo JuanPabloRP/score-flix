@@ -79,7 +79,7 @@ const PrivateNavbar = () => {
 						<ul className="py-2" aria-labelledby="user-menu-button">
 							<li>
 								<Link
-									to={'/sf/user'}
+									to={'/sf/profile'}
 									className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
 								>
 									Perfil
@@ -116,9 +116,9 @@ const PrivateNavbar = () => {
 						>
 							<path
 								stroke="currentColor"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="2"
 								d="M1 1h15M1 7h15M1 13h15"
 							/>
 						</svg>

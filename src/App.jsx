@@ -13,6 +13,7 @@ import MyMovies from './pages/Movies/MyMovies';
 import NoMatch from './pages/NoMatch';
 import EditInfoMovie from './pages/Movies/EditInfoMovie';
 import { URL_API } from './utils/CONSTANTS';
+import Profile from './pages/user/Profile';
 
 function App() {
 	const [userData, setUserData] = useState({});
@@ -77,11 +78,12 @@ function App() {
 				>
 					<Router>
 						<Routes>
-							<Route path="/sf" element={<PrivateLayout />}>
+							<Route path="/sf/" element={<PrivateLayout />}>
 								<Route path="mymovies" element={<MyMovies />} />
 								<Route path="mymovies/:id" element={<EditInfoMovie />} />
 								<Route path="new" element={<NewMovie />} />
 								<Route path="movies" element={<Movies />} />
+								<Route path="profile" element={<Profile />} />
 							</Route>
 							<Route path="/auth" element={<AuthLayout />}>
 								<Route path="signin" element={<SignIn />} />

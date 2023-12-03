@@ -16,6 +16,7 @@ const EditInfoMovie = () => {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',
+				authorization: localStorage.getItem('token'),
 			},
 			body: JSON.stringify({
 				id: id,
@@ -43,7 +44,13 @@ const EditInfoMovie = () => {
 	};
 
 	useEffect(() => {
-		fetch(URL_API)
+		fetch(`${URL_API}/reviews`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				authorization: localStorage.getItem('token'),
+			},
+		})
 			.then((res) => {
 				if (!res.ok) {
 					throw new Error('Error obtener las reseñas');

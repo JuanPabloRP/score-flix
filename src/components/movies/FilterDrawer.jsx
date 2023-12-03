@@ -22,10 +22,10 @@ const FilterDrawer = ({ durationRange, setDurationRange }) => {
 
 	return (
 		<main className=" fixed bottom-2 right-2">
-			<section class="text-center">
+			<section className="text-center">
 				{/* boton flotante */}
 				<button
-					class=" text-white rounded-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+					className=" text-white rounded-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
 					type="button"
 					data-drawer-target="drawer-example"
 					data-drawer-show="drawer-example"
@@ -39,20 +39,20 @@ const FilterDrawer = ({ durationRange, setDurationRange }) => {
 			{/* drawer */}
 			<section
 				id="drawer-example"
-				class={`${
+				className={`${
 					openDrawer ? 'fixed' : 'hidden'
 				} top-16 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform  bg-white w-80 dark:bg-gray-800`}
-				tabindex="-1"
+				tabIndex="-1"
 				aria-labelledby="drawer-label"
 			>
 				{/* header drawer */}
 				<header>
 					<h5
 						id="drawer-label"
-						class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
+						className="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
 					>
 						<svg
-							class="w-4 h-4 mr-2.5"
+							className="w-4 h-4 mr-2.5"
 							aria-hidden="true"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="currentColor"
@@ -66,11 +66,11 @@ const FilterDrawer = ({ durationRange, setDurationRange }) => {
 						type="button"
 						data-drawer-hide="drawer-example"
 						aria-controls="drawer-example"
-						class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
+						className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
 						onClick={() => setOpenDrawer(false)}
 					>
 						<svg
-							class="w-3 h-3"
+							className="w-3 h-3"
 							aria-hidden="true"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -78,13 +78,13 @@ const FilterDrawer = ({ durationRange, setDurationRange }) => {
 						>
 							<path
 								stroke="currentColor"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="2"
 								d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
 							/>
 						</svg>
-						<span class="sr-only">Close menu</span>
+						<span className="sr-only">Close menu</span>
 					</button>
 				</header>
 				{/* Filtros */}
@@ -106,38 +106,15 @@ const FilterDrawer = ({ durationRange, setDurationRange }) => {
 					/>
 				</section>
 
-				{/* Confirmar filtros btn */}
-				{/* <section class="flex justify-center mt-5">
-					<button
-						onClick={() => setOpenDrawer(false)}
-						class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-					>
-						Filtrar{' '}
-						<svg
-							class="w-3.5 h-3.5 ml-2"
-							aria-hidden="true"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 14 10"
-						>
-							<path
-								stroke="currentColor"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M1 5h12m0 0L9 1m4 4L9 9"
-							/>
-						</svg>
-					</button>
-				</section> */}
+
 
 				<section className="mt-10">
 					<h5
 						id="drawer-label"
-						class="inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400"
+						className="inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400"
 					>
 						<svg
-							class="w-4 h-4 mr-2.5"
+							className="w-4 h-4 mr-2.5"
 							aria-hidden="true"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="currentColor"
@@ -156,3 +133,32 @@ const FilterDrawer = ({ durationRange, setDurationRange }) => {
 };
 
 export default FilterDrawer;
+
+				{
+					/* Confirmar filtros btn */
+				}
+				{
+					/* <section className="flex justify-center mt-5">
+					<button
+						onClick={() => setOpenDrawer(false)}
+						className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+					>
+						Filtrar{' '}
+						<svg
+							className="w-3.5 h-3.5 ml-2"
+							aria-hidden="true"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 14 10"
+						>
+							<path
+								stroke="currentColor"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M1 5h12m0 0L9 1m4 4L9 9"
+							/>
+						</svg>
+					</button>
+				</section> */
+				}

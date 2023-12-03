@@ -24,13 +24,13 @@ const CheckBoxGroup = ({ genres, handleGenreChange, value }) => {
 			}
 		}
 	}; */
-	
+
 	return (
 		<section>
-			<h3 class="mb-5 text-sm  text-gray-900 dark:text-gray-400">
+			<h3 className="mb-5 text-sm  text-gray-900 dark:text-gray-400">
 				Elegir genero:
 			</h3>
-			<ul class="flex justify-start items-center flex-wrap w-full gap-6">
+			<ul className="flex justify-start items-center flex-wrap w-full gap-6">
 				{genres.map((genre, index) => (
 					<li key={index}>
 						<input
@@ -38,14 +38,14 @@ const CheckBoxGroup = ({ genres, handleGenreChange, value }) => {
 							id={`${genre.genre}-option`}
 							name="genre"
 							value={genre.genre}
-							class="hidden peer"
+							className="hidden peer"
 							required=""
 							checked={genre.isSelected}
 							onChange={(e) => handleGenreChange(e, index)}
 						/>
 						<label
-							for={`${genre.genre}-option`}
-							class="text-center p-1  text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+							htmlFor={`${genre.genre}-option`}
+							className="text-center p-1  text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
 						>
 							{genre.genre}
 						</label>

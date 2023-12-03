@@ -138,7 +138,7 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 						required
 					/>
 					<label
-						for="title"
+						htmlFor="title"
 						className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 					>
 						Titulo película
@@ -161,7 +161,7 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 						pattern={'[0-9]*[.][0-9]*'}
 					/>
 					<label
-						for="rate"
+						htmlFor="rate"
 						className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 					>
 						Puntuación (Ej: 9.4)
@@ -184,7 +184,7 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 						max={1000}
 					/>
 					<label
-						for="duration"
+						htmlFor="duration"
 						className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 					>
 						Duración (min)
@@ -204,7 +204,7 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 						max={'2024-12-31'}
 					/>
 					<label
-						for="date"
+						htmlFor="date"
 						className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 					>
 						Fecha de estreno
@@ -225,24 +225,24 @@ const FormMovie = ({ isEditing, reviewToEdit, onSubmit }) => {
 
 			<section className="relative z-0 w-full mb-6 group">
 				<section>
-					<h3 class="mb-5 text-sm  text-gray-900 dark:text-gray-400">
+					<h3 className="mb-5 text-sm  text-gray-900 dark:text-gray-400">
 						Elegir genero:
 					</h3>
-					<ul class="flex justify-start items-center flex-wrap w-full gap-6">
+					<ul className="flex justify-start items-center flex-wrap w-full gap-6">
 						{genresArray.map((genre, index) => (
 							<li key={index}>
 								<input
 									type="checkbox"
 									id={`${genre}-option`}
 									value={genre}
-									class="hidden peer"
+									className="hidden peer"
 									required=""
 									checked={genresSelected.includes(genre)}
 									onChange={(e) => handleGenreChange(e, index)}
 								/>
 								<label
-									for={`${genre}-option`}
-									class="text-center p-1  text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+									htmlFor={`${genre}-option`}
+									className="text-center p-1  text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
 								>
 									{genre}
 								</label>
